@@ -1,0 +1,13 @@
+#!/opt/local/bin/kermit +
+#!/usr/local/bin/kermit +
+ftp open upload.sourceforge.net /user:anonymous /password:jfunge@gmail.com
+if fail exit 1 Connection failed
+if not \v(ftp_loggedin) exit 1 Login failed
+ftp cd /incoming
+if fail exit 1 ftp cd /incoming: \v(ftp_message)
+ftp put /binary \%0
+if fail exit 1 ftp put /binary \%1: \v(ftp_message)
+ftp put /binary \%1
+if fail exit 1 ftp put /binary \%2: \v(ftp_message)
+ftp bye
+exit
